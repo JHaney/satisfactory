@@ -1,6 +1,6 @@
 # Satisfactory Dedicated Server
 
-Built using cm2network/steamcmd.
+Built using debian:buster-slim
 
 ### Create 2 dirs in docker
 - /docker/satisfactory/game
