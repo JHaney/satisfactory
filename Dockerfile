@@ -20,14 +20,18 @@ RUN set -x \
 	&& dpkg --add-architecture i386 \
 	&& apt-get update \
 	&& apt-get install -y --no-install-recommends --no-install-suggests \
-		lib32stdc++6=8.3.0-6 \
-		lib32gcc1=1:8.3.0-6 \
-		wget=1.20.1-1.1 \
-		ca-certificates=20200601~deb10u2 \
-		nano=3.2-3 \
+#		lib32stdc++6=8.3.0-6 \
+#		lib32gcc1=1:8.3.0-6 \
+#		wget=1.20.1-1.1 \
+#		ca-certificates=20200601~deb10u2 \
+#		nano=3.2-3 \
+		lib32stdc++6 \
+		lib32gcc1 \
+		wget \
+		ca-certificates \
+		curl \
 		libsdl2-2.0 \
 		libsdl2-2.0:i386 \
-		curl \
 	&& useradd -u "${PUID}" -m "${USER}" \
 	&& su "${USER}" -c \
                 "mkdir -p \"${STEAMCMDDIR}\" \
