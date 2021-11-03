@@ -3,7 +3,6 @@
 ############################################################
 FROM debian:buster-slim
 
-LABEL maintainer="someguy@blah.com"
 ARG PUID=1000
 
 ENV USER steam
@@ -28,32 +27,12 @@ RUN set -x \
 		libsdl2-2.0 \
 		libsdl2-2.0:i386 \
 	&& useradd -u "${PUID}" -m "${USER}" \
-	&& su "${USER}" -c \
-                "mkdir -p \"${STEAMCMDDIR}\" \
-                && wget -qO- 'https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz' | tar xvzf - -C \"${STEAMCMDDIR}\" \
-                && \"./${STEAMCMDDIR}/steamcmd.sh\" +quit \
-                && mkdir -p \"${HOMEDIR}/.steam/sdk32\" \
-                && ln -s \"${STEAMCMDDIR}/linux32/steamclient.so\" \"${HOMEDIR}/.steam/sdk32/steamclient.so\" \
-                && ln -s \"${STEAMCMDDIR}/linux32/steamcmd\" \"${STEAMCMDDIR}/linux32/steam\" \
-                && ln -s \"${STEAMCMDDIR}/steamcmd.sh\" \"${STEAMCMDDIR}/steam.sh\"" \
-	&& ln -s "${STEAMCMDDIR}/linux32/steamclient.so" "/usr/lib/i386-linux-gnu/steamclient.so" \
-	&& ln -s "${STEAMCMDDIR}/linux64/steamclient.so" "/usr/lib/x86_64-linux-gnu/steamclient.so" \
-	&& apt-get remove --purge -y \
-		wget \
 	&& apt-get clean autoclean \
 	&& apt-get autoremove -y \
 	&& rm -rf /var/lib/apt/lists/*
 
-# ensure diretories for install and save game
-RUN mkdir -p ${SAVEDIR} && mkdir -p ${STEAMAPPDIR}
-
-#if you dont mount these they will not be persistent and will die when the container stops
-VOLUME ${STEAMCMDDIR} 	# optional "/home/steam/steamcmd"
-VOLUME ${STEAMAPPDIR} 	# "/home/steam/satisfactory-dedicated"
-VOLUME ${SAVEDIR}	# "/home/steam/.config/Epic/FactoryGame"
-
-WORKDIR ${STEAMCMDDIR} #added
-WORKDIR ${HOMEDIR}
+# Mount or Die. 
+VOLUME ${HOMEDIR}	#Mount to: /home/steam
 
 COPY entry.sh .
 
