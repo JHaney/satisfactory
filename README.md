@@ -2,14 +2,17 @@
 
 Built using debian:buster-slim
 
-### Create 2 dirs in docker
-- /docker/satisfactory/game
-- /docker/satisfactory/config
+### IF SYNOLOGY
+#### Create a dir for the docker volume persistent space IE:
+- /docker/satisfactory
 
-### SSH in chown them (assumes docker is on volume1)
-- sudo chown 1000:1000 /volume1/docker/satisfactory/game
-- sudo chown 1000:1000 /volume1/docker/satisfactory/config
+#### Launch the image and hit Advanced Settings
+#### Select Volume tab and Add the folder you created and set the mount path to:
+- /home/steam
 
-### Create image and set mount dirs
-- /home/steam/satisfactory-dedicated
-- /home/steam/.config/Epic/FactoryGame
+#### Set ports from AUTO to their right hand numeric neighboor.
+- Auto->15000
+- Auto->15777
+- Auto->7777
+
+#### Hit Apply then Next->Done and load up satisfactory and finalize your server.
