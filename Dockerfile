@@ -20,11 +20,6 @@ RUN set -x \
 	&& dpkg --add-architecture i386 \
 	&& apt-get update \
 	&& apt-get install -y --no-install-recommends --no-install-suggests \
-#		lib32stdc++6=8.3.0-6 \
-#		lib32gcc1=1:8.3.0-6 \
-#		wget=1.20.1-1.1 \
-#		ca-certificates=20200601~deb10u2 \
-#		nano=3.2-3 \
 		lib32stdc++6 \
 		lib32gcc1 \
 		wget \
@@ -48,9 +43,6 @@ RUN set -x \
 	&& apt-get clean autoclean \
 	&& apt-get autoremove -y \
 	&& rm -rf /var/lib/apt/lists/*
-
-# Switch to user
-USER ${USER}
 
 # ensure diretories for install and save game
 RUN mkdir -p ${SAVEDIR} && mkdir -p ${STEAMAPPDIR}
