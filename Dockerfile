@@ -14,6 +14,8 @@ ENV STEAMAPP satisfactory
 ENV STEAMAPPDIR "${HOMEDIR}/${STEAMAPP}-dedicated"
 ENV SAVEDIR "${HOMEDIR}/.config/Epic/FactoryGame"
 
+ENV BRANCH "public"
+
 #Primary install and configuration of app
 RUN set -x \
 	&& dpkg --add-architecture i386 \
