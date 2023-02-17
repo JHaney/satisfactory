@@ -3,7 +3,8 @@
 ############################################################
 FROM debian:buster-slim
 
-ARG PUID=1000
+ENV PUID=1000
+ENV PGID=1000
 
 ENV USER steam
 ENV HOMEDIR "/home/${USER}"

@@ -1,0 +1,19 @@
+version: '3'
+
+volumes:
+  satisfactory-data:
+    driver: local
+
+services:
+  server:
+    image: duckmang/satisfactory:latest
+    container_name: satisfactory
+    restart: 'no'
+    stop_grace_period: 60s
+    volumes:
+      - satisfactory-data:/home/steam
+#      - ../home/steam:/home/steam
+    ports:
+      - '7777:7777'
+      - '15000:15000'
+      - '15777:15777'
